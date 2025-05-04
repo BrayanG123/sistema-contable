@@ -12,6 +12,7 @@ import { SistemaContablePage } from "../views/SistemaContablePage";
 import { MainLayout } from "../views/MainLayout";
 import { CompanyPage } from "../views/pages/company/CompanyPage";
 import { CreateCompanyPage } from "../views/pages/company/CreateCompanyPage";
+import { EditCompanyPage } from "../views/pages/company/EditCompanyPage";
 
 
 
@@ -57,6 +58,7 @@ export const AppRouter = () => {
                         <Route path="/auth/*" element={ <LoginPage /> }/>
                         <Route path="company" element={ <CompanyPage /> }/>
                         <Route path="company/create" element={ <CreateCompanyPage /> }/>
+                        <Route path="company/edit" element={ <EditCompanyPage /> }/>
                         <Route path="supplier" element={ <SupplierPage /> }/>
                       </Routes>
                     </MainLayout> } />

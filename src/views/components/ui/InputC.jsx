@@ -6,7 +6,7 @@ export const InputC = ( props ) => {
 
     return (
         <input 
-            className="
+            className={`
                 bg-white 
                 outline-gray-300 
                 placeholder:text-gray-400 
@@ -16,9 +16,12 @@ export const InputC = ( props ) => {
                 px-3 py-1.5 text-base 
                 focus:outline-2 focus:-outline-offset-2 
                 sm:text-sm/6
-                "
+                ${props.className || ''}
+            `}
+                
             { ...props }
             type={ props.type || 'text' }
+            value={ props.value || '' }
         />                   
     )
 }

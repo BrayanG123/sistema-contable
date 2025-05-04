@@ -10,6 +10,8 @@ export const useCopmpanyStore = () => {
     const dispatch = useDispatch();
     const { companies, activeCompany } = useSelector( state => state.companies)
 
+
+    
     const setActiveCompany = ( branch ) => {
         dispatch( onSetActiveCompany( branch ) );
     }
@@ -18,7 +20,6 @@ export const useCopmpanyStore = () => {
     const startLoadingCompanies = async() => { 
         try {
             const { data } = await contabilidadApi.get('/empresa');
-            // console.log(data);
             dispatch( onLoadCompanies( data ) );
         } catch (error) {
             console.log('Error cargando eventos');
@@ -50,7 +51,6 @@ export const useCopmpanyStore = () => {
     //POST - crear Empresa
     const startCreateCompany = async( company ) => {
         try {
-            console.log(company)
             const { data } = await contabilidadApi.post( '/empresa', company ); 
             dispatch( onAddNewCompany(data) ); 
             return { success: true };
@@ -61,13 +61,10 @@ export const useCopmpanyStore = () => {
     }
     
         // PUT - actualizar Empresa
-    const startUpdateCompany = async ( {name, location} ) => {
-        const updatedCompany = {
-            nombre: name,          // 'name' a 'nombre'
-            direccion: location
-        };
+    const startUpdateCompany = async ( id, company ) => {    
         try {
-            const { data } = await contabilidadApi.put(`//${activeCompany.id}/`, updatedCompany );
+            const { data } = await contabilidadApi.put(`/empresa/${ id }`, company );
+            console.log(data);
             dispatch( onUpdateCompany( data) );
             return { success: true };
         } catch (error) {
@@ -77,12 +74,11 @@ export const useCopmpanyStore = () => {
     }
     
         // Delete 
-    const startDeleteCompany = async() => {
+    const startDeleteCompany = async( id ) => {
         try {         
-            const { data } = await contabilidadApi.delete( `//${ Number(activeCompany.id) }/` );
-            // console.log(data);
+            const { data } = await contabilidadApi.delete( `/empresa/${ id }` );
             dispatch( onDeleteCompany() );
-            return;
+            return { success: true };
         } catch (error) {
             console.log('error en la solicitud');
             console.log(error.response.data);

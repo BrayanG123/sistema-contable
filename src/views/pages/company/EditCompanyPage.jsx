@@ -4,34 +4,30 @@ import { InputFC } from "../../components/ui/InputFC"
 import { LabelC } from "../../components/ui/LabelC"
 import { useCopmpanyStore } from "../../../controllers/company/useCopmpanyStore"
 import { useForm } from "../../../helpers/useForm"
+import Swal from "sweetalert2"
 
 
 
-let registerFormFields = {
-    nombre: '',
-    nit: 0,
-    direccion: '',
-    telefono: '',
-    email: '',
-}
 
+export const EditCompanyPage = () => {
 
-export const CreateCompanyPage = () => {
-
-    const { startLoadingCompanies, startCreateCompany } = useCopmpanyStore();
-    const { nombre, nit, direccion, telefono, correo, onInputChange } = useForm( registerFormFields );
-
-
-    const registerSubmit = async( event ) => {
-        event.preventDefault();
-        const result = await startCreateCompany({ nombre, nit, direccion, telefono, correo} );
-        if (result)  
-            startLoadingCompanies();
-    }
+    const { activeCompany, startLoadingCompanies, startUpdateCompany } = useCopmpanyStore();
+    const { nombre, nit, direccion, telefono, correo, onInputChange, setFormState } = useForm( activeCompany );
 
     useEffect(() => {
-        startLoadingCompanies();
-    }, []) 
+        if ( activeCompany ) {
+            setFormState( { ...activeCompany } );
+        }
+    }, [activeCompany]); 
+
+    const saveChangesSubmit = async( event ) => {
+        event.preventDefault();
+        const result = await startUpdateCompany( activeCompany.id, { nombre, nit, direccion, telefono, correo} );
+        if (result) {
+            startLoadingCompanies();
+            Swal.fire({ title: "Realizado!", icon: "success", draggable: true });
+        } 
+    }
 
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-blue-100">
@@ -39,34 +35,34 @@ export const CreateCompanyPage = () => {
             <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-10">
                 <h2 className="text-2xl font-bold mb-4 text-center">Registrar Empresa</h2>
                 
-                <form onSubmit={ registerSubmit }>
-                    <div className="mb-4 ">
+                <form onSubmit={ saveChangesSubmit }>
+                    <div className="mb-4 form-group">
                         <LabelC> Nombre de la Empresa </LabelC>
-                        <InputFC id="nombre" name="nombre" type="text" required
+                        <InputFC id="nombre" name="nombre" value={ nombre } type="text" required
                             placeholder="Nombre Empresa" onChange={ onInputChange } />
                     </div>
 
-                    <div className="mb-4 ">
+                    <div className="mb-4 form-group">
                         <LabelC> NIT </LabelC>
-                        <InputFC id="nit" name="nit" type="number" required
+                        <InputFC id="nit" name="nit" type="number" value={ nit } required
                             placeholder="Introduzca el NIT" onChange={ onInputChange } />
                     </div>
 
-                    <div className="mb-4 ">
+                    <div className="mb-4 form-group">
                         <LabelC>Direccion</LabelC>
-                        <InputFC  id="direccion" name="direccion" type="text" required 
+                        <InputFC  id="direccion" name="direccion" type="text" value={ direccion } required 
                             placeholder="Introduzca la direccion" onChange={ onInputChange }/>
                     </div>
 
                     <div className="row mb-4 flex">
-                        <div className="w-1/2 pr-2 ">
+                        <div className="w-1/2 pr-2 form-group">
                             <LabelC> Telefono </LabelC>
-                            <InputFC id="telefono"name="telefono" type="number"
+                            <InputFC id="telefono"name="telefono" value={ telefono } type="number"
                                     placeholder="Numero de telefono" onChange={ onInputChange }/>
                         </div>
-                        <div className="w-1/2 pl-2 ">
+                        <div className="w-1/2 pl-2 form-group">
                             <LabelC> Correo </LabelC>
-                            <InputFC id="correo"name="correo" type="text"// required
+                            <InputFC id="correo"name="correo" type="text" value={ correo }
                                 placeholder="Introduzca el correo" onChange={ onInputChange }/>
                         </div>
                     </div>
@@ -78,7 +74,7 @@ export const CreateCompanyPage = () => {
                                     Registrar
                                 </button> */}
                                 <ButtonC type="submit"bgColor="bg-blue-600"hoverColor="hover:bg-blue-500">
-                                    Registrar
+                                    Guardar
                                 </ButtonC>
                                 <ButtonC bgColor='bg-red-600' hoverColor='hover:bg-red-500'>
                                     Atras
@@ -90,5 +86,4 @@ export const CreateCompanyPage = () => {
             </div>
         </div>
     )
-
 }
