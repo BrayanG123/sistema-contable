@@ -12,17 +12,17 @@ export const useCopmpanyStore = () => {
 
 
     
-    const setActiveCompany = ( branch ) => {
-        dispatch( onSetActiveCompany( branch ) );
+    const setActiveCompany = ( company ) => {
+        dispatch( onSetActiveCompany( company ) );
     }
     
     // Cargar Empresas
     const startLoadingCompanies = async() => { 
         try {
-            const { data } = await contabilidadApi.get('/empresa');
+            const { data } = await contabilidadApi.get('/companies');
             dispatch( onLoadCompanies( data ) );
         } catch (error) {
-            console.log('Error cargando eventos');
+            console.log('Error en la solicitud');
             console.log(error.response)
         }
     }
@@ -38,9 +38,10 @@ export const useCopmpanyStore = () => {
         }
     }
     
+    //Retornar Empresa por su Id
     const startGetCompanyById = async( id ) => { 
         try {
-            const { data } = await contabilidadApi.get(`//${id}/`);
+            const { data } = await contabilidadApi.get(`/companies/${id}`);
             return data;
         } catch (error) {
             console.log('Error en la solicitud');
@@ -51,7 +52,7 @@ export const useCopmpanyStore = () => {
     //POST - crear Empresa
     const startCreateCompany = async( company ) => {
         try {
-            const { data } = await contabilidadApi.post( '/empresa', company ); 
+            const { data } = await contabilidadApi.post( '/companies', company ); 
             dispatch( onAddNewCompany(data) ); 
             return { success: true };
         } catch (error) {
@@ -63,7 +64,7 @@ export const useCopmpanyStore = () => {
         // PUT - actualizar Empresa
     const startUpdateCompany = async ( id, company ) => {    
         try {
-            const { data } = await contabilidadApi.put(`/empresa/${ id }`, company );
+            const { data } = await contabilidadApi.put(`/companies/${ id }`, company );
             console.log(data);
             dispatch( onUpdateCompany( data) );
             return { success: true };
@@ -76,7 +77,7 @@ export const useCopmpanyStore = () => {
         // Delete 
     const startDeleteCompany = async( id ) => {
         try {         
-            const { data } = await contabilidadApi.delete( `/empresa/${ id }` );
+            const { data } = await contabilidadApi.delete( `/companies/${ id }` );
             dispatch( onDeleteCompany() );
             return { success: true };
         } catch (error) {

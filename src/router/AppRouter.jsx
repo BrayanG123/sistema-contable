@@ -13,6 +13,10 @@ import { MainLayout } from "../views/MainLayout";
 import { CompanyPage } from "../views/pages/company/CompanyPage";
 import { CreateCompanyPage } from "../views/pages/company/CreateCompanyPage";
 import { EditCompanyPage } from "../views/pages/company/EditCompanyPage";
+import { CreateSupplierPage } from "../views/pages/supplier/CreateSupplierPage";
+import { EditSupplierPage } from "../views/pages/supplier/EditSupplierPage";
+import { CustomerPage } from "../views/pages/customer/CustomerPage";
+import { CreateCustomerPage } from "../views/pages/customer/CreateCustomerPage";
 
 
 
@@ -53,13 +57,17 @@ export const AppRouter = () => {
                 //       </>
                 //     ) 
                 <>
-                    <Route path="/admin/*" element={ <MainLayout >
+                    <Route path="/app/*" element={ <MainLayout >
                       <Routes>
                         <Route path="/auth/*" element={ <LoginPage /> }/>
                         <Route path="company" element={ <CompanyPage /> }/>
                         <Route path="company/create" element={ <CreateCompanyPage /> }/>
                         <Route path="company/edit" element={ <EditCompanyPage /> }/>
                         <Route path="supplier" element={ <SupplierPage /> }/>
+                        <Route path="supplier/create" element={ <CreateSupplierPage /> }/>
+                        <Route path="supplier/edit" element={ <EditSupplierPage /> }/>
+                        <Route path="customer" element={ <CustomerPage /> }/>
+                        <Route path="customer/create" element={ <CreateCustomerPage /> }/>
                       </Routes>
                     </MainLayout> } />
                       {/* <Route path="/" element={ <SistemaContablePage /> }/> */}

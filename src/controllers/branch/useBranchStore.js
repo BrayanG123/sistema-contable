@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onLoadBranches, onSetActiveBranch, onAddNewBranch, onUpdateBranch, onDeleteBranch } from "../../store";
-import ecommerceApi from "../../api/ecommerceApi";
+import contabilidadApi from "../../api/contabilidadApi";
 
 
 
@@ -17,7 +17,7 @@ export const useBranchStore = () => {
     // Cargar Sucursales
     const startLoadingBranches = async() => { 
         try {
-            const { data } = await ecommerceApi.get('/sucursales/');
+            const { data } = await contabilidadApi.get('/sucursales/');
             dispatch( onLoadBranches( data.results ) );
         } catch (error) {
             console.log('Error cargando eventos');
@@ -28,7 +28,7 @@ export const useBranchStore = () => {
     // Retornar Sucursales
     const startGetAllBranches = async() => { 
         try {
-            const { data } = await ecommerceApi.get('/sucursales/');
+            const { data } = await contabilidadApi.get('/sucursales/');
             return data.results;
         } catch (error) {
             console.log('Error en la Solicitud');
@@ -38,7 +38,7 @@ export const useBranchStore = () => {
 
     const startGetBranchById = async( id ) => { 
         try {
-            const { data } = await ecommerceApi.get(`/sucursales/${id}/`);
+            const { data } = await contabilidadApi.get(`/sucursales/${id}/`);
             return data;
         } catch (error) {
             console.log('Error en la solicitud');
@@ -49,7 +49,7 @@ export const useBranchStore = () => {
     //POST - crear sucursal
     const startCreateBranch = async( {name:nombre, location:direccion} ) => {
         try {
-            const { data } = await ecommerceApi.post( '/sucursales/', {nombre, direccion} ); 
+            const { data } = await contabilidadApi.post( '/sucursales/', {nombre, direccion} ); 
             dispatch( onAddNewBranch({ nombre, direccion, id: data.id }) ); 
             return { success: true };
         } catch (error) {
@@ -66,7 +66,7 @@ export const useBranchStore = () => {
         };
         try {
             console.log('startupdate activado')
-            const { data } = await ecommerceApi.put(`/sucursales/${activeBranch.id}/`, updatedBranch, {
+            const { data } = await contabilidadApi.put(`/sucursales/${activeBranch.id}/`, updatedBranch, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -82,7 +82,7 @@ export const useBranchStore = () => {
     // Delete 
     const startDeleteBranch = async() => {
         try {         
-            const { data } = await ecommerceApi.delete( `/sucursales/${ Number(activeBranch.id) }/` );
+            const { data } = await contabilidadApi.delete( `/sucursales/${ Number(activeBranch.id) }/` );
             console.log(data);
             dispatch( onDeleteBranch( ) );
             startLoadingBranches();

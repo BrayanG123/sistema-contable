@@ -1,23 +1,25 @@
-import { useEffect } from "react";
-import { useSupplierStore } from "../../../controllers/supplier/useSupplierStore"
-import { SupplierTableItem } from "../../components/SupplierTableItem";
 
 
 
 
+import React, { useEffect } from 'react'
+import { useCustomerStore } from '../../../controllers'
+import { CustomerTableItem } from '../../components/CustomerTableItem';
 
-export const SupplierPage = () => {
+export const CustomerPage = () => {
 
-    const { suppliers, startLoadingSuppliers } = useSupplierStore();
+    const { customers, startLoadingCustomers } = useCustomerStore();
+
+
 
     useEffect(() => {
-        startLoadingSuppliers();
-    }, [])
-    
-    return (            
+        startLoadingCustomers();
+    }, [])  
+
+    return (
         <div className="h-auto w-full flex items-center justify-center bg-blue-100">
-            <div className="w-full max-w-8xl mx-auto bg-white rounded-lg shadow-lg p-10">
-                <h2 className="text-2xl font-bold mb-4 text-center">Lista de Proveedores</h2>
+            <div className="w-full max-w-8xl mx-auto bg-white rounded-lg shadow-lg p-10 mt-10">
+                <h2 className="text-2xl font-bold mb-4 text-center">Lista de Clientes</h2>
                 
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg ">
                     <thead className="bg-blue-500 text-white">
@@ -25,8 +27,9 @@ export const SupplierPage = () => {
                             <th className="w-1/12 px-5 py-3 text-cente">Nombre</th>
                             <th className="w-1/12 px-5 py-3 text-center">NIT</th>
                             <th className="w-1/12 px-5 py-3 text-center">Empresa</th>
-                            <th className="w-2/12 px-5 py-3 text-center">Direccion</th>
                             <th className="w-2/12 px-5 py-3 text-center">Correo</th>
+                            <th className="w-2/12 px-5 py-3 text-center">Telefono</th>
+                            <th className="w-2/12 px-5 py-3 text-center">Direccion</th>
                             <th className="w-2/12 px-5 py-3 text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -37,10 +40,10 @@ export const SupplierPage = () => {
                     <table className="min-w-full bg-white border border-gray-300">
                         <tbody>
 
-                            {   suppliers.map( supplier => (
-                                    <SupplierTableItem 
-                                        key={ supplier.id }
-                                        { ...supplier }
+                            {   customers.map( customer => (
+                                    <CustomerTableItem 
+                                        key={ customer.id }
+                                        { ...customer }
                                     />
                                 ) )
                             }
@@ -49,6 +52,7 @@ export const SupplierPage = () => {
                     </table>               
                 </div>
             </div>
-        </div>   
+        </div>
     )
+
 }
