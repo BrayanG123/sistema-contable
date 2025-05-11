@@ -2,11 +2,10 @@ import { useEffect, useState } from "react"
 import { ButtonC } from "../../components/ui/ButtonC"
 import { InputFC } from "../../components/ui/InputFC"
 import { LabelC } from "../../components/ui/LabelC"
-import { useCopmpanyStore } from "../../../controllers/company/useCopmpanyStore"
 import { useForm } from "../../../helpers/useForm"
 import Swal from "sweetalert2"
-import { useSupplierStore } from "../../../controllers/supplier/useSupplierStore"
 import { useNavigate } from "react-router-dom"
+import { useCompanyStore, useSupplierStore } from "../../../controllers"
 
 
 
@@ -16,11 +15,11 @@ export const EditSupplierPage = () => {
     const navigate = useNavigate();
 
     const { activeSupplier, startLoadingSuppliers, startUpdateSupplier, setActiveSupplier } = useSupplierStore();
-    const { nombre, nit, empresa, direccion, correo, onInputChange, setFormState } = useForm( activeSupplier );
-    const { companies, startLoadingCompanies, startGetCompanyById } = useCopmpanyStore(); 
+    const { name, nit, company, address, email, onInputChange, setFormState } = useForm( activeSupplier );
+    const { companies, startLoadingCompanies, startGetCompanyById } = useCompanyStore(); 
 
     const [nombreEmpresa, setNombreEmpresa] = useState(null);
-    
+     
     
     useEffect(() => {
         if ( activeSupplier && companies) {
@@ -30,10 +29,10 @@ export const EditSupplierPage = () => {
 
     const saveChangesSubmit = async( event ) => {
         event.preventDefault();
-        const empresaId = empresa? empresa : activeSupplier.empresaId;
-        // console.log({ nombre, nit, empresaId, direccion, correo});
+        const company_id = empresa? empresa : activeSupplier.company_id;
+        // console.log({ name, nit, company_id, address, email});
         // return;
-        const result = await startUpdateSupplier( activeSupplier.id, { nombre, nit, empresaId, direccion, correo} );
+        const result = await startUpdateSupplier( activeSupplier.id, { name, nit, company_id, address, email} );
         if (result) {
             startLoadingSuppliers();
             Swal.fire({ title: "Realizado!", icon: "success", draggable: true });
@@ -48,8 +47,8 @@ export const EditSupplierPage = () => {
 
     const getNombreEmpresa = async() => {
         if ( activeSupplier ) {
-            const company = await startGetCompanyById( activeSupplier.empresaId );
-            setNombreEmpresa( company.nombre );
+            const company = await startGetCompanyById( activeSupplier.company_id );
+            setNombreEmpresa( company.name );
         }
     }
 
@@ -68,7 +67,7 @@ export const EditSupplierPage = () => {
                 <form onSubmit={ saveChangesSubmit }>
                     <div className="mb-4">
                         <LabelC> Nombre de la Proveedor </LabelC>
-                        <InputFC id="nombre" name="nombre" value={ nombre } type="text" required
+                        <InputFC id="name" name="name" value={ name } type="text" required
                             placeholder="Nombre Proveedor" onChange={ onInputChange } />
                     </div>
 
@@ -84,8 +83,8 @@ export const EditSupplierPage = () => {
                             placeholder="Introduzca la empresa" onChange={ onInputChange }/> */}
                             <select
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                name="empresa"
-                                value={empresa}
+                                name="company"
+                                value={company}
                                 onChange={onInputChange}
                             >
                                 <option value=""> { nombreEmpresa || "Cargando..." } </option>
@@ -99,7 +98,7 @@ export const EditSupplierPage = () => {
 
                     <div className="mb-4">
                         <LabelC>Direccion</LabelC>
-                        <InputFC  id="direccion" name="direccion" type="text" value={ direccion } required 
+                        <InputFC name="address" type="text" value={ address } required 
                             placeholder="Introduzca la direccion" onChange={ onInputChange }/>
                     </div>
 
@@ -111,8 +110,8 @@ export const EditSupplierPage = () => {
                         </div>
                         <div className="w-1/2 pl-2">
                             <LabelC> Correo </LabelC>
-                            <InputFC id="correo"name="correo" type="text" value={ correo }
-                                placeholder="Introduzca el correo" onChange={ onInputChange }/>
+                            <InputFC name="email" type="text" value={ email }
+                                placeholder="Introduzca el email" onChange={ onInputChange }/>
                         </div>
                     </div>
 

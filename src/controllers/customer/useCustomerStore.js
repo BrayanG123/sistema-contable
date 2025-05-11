@@ -26,7 +26,7 @@ export const useCustomerStore = () => {
     // Retornar Clientes
     const startGetAllCustomers = async() => { 
         try {
-            const { data } = await contabilidadApi.get('//');
+            const { data } = await contabilidadApi.get('/clients');
             return data.results;
         } catch (error) {
             console.log('Error en la Solicitud');
@@ -60,7 +60,7 @@ export const useCustomerStore = () => {
         // PUT - actualizar Cliente
     const startUpdateCustomer = async ( id, customer ) => {    
         try {
-            const { data } = await contabilidadApi.put(`/companies/${customer.empresaId}/clients/${id}`, customer );
+            const { data } = await contabilidadApi.put(`/companies/${customer.company_id}/clients/${id}`, customer );
             console.log(data);
             dispatch( onUpdateCustomer( data) );
             return { success: true };

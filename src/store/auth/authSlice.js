@@ -7,9 +7,7 @@ export const authSlice = createSlice({
 
     initialState: {
         status: 'checking', // 'authenticated' 'not-authenticated'
-        user: {
-
-        },
+        user: {},
         role: 'GUEST', // 'ADMIN' 'CLIENT' 'GUEST'
         errorMessage: undefined,
     },
@@ -24,12 +22,11 @@ export const authSlice = createSlice({
         },
 
         onLogin: ( state, { payload } ) => {
-            state.status = 'authenticated';
-        
-            state.user = payload;
-        
+            console.log('onLogin ejecutandose')
+            state.status = 'authenticated';     
+            state.user = payload;     
             state.errorMessage = undefined;
-        
+            console.log(state.user, state.status)
             // Asignamos rol en base al grupo
             // switch (payload.groups?.toLowerCase()) {
             //     case 'administradores':
@@ -45,6 +42,7 @@ export const authSlice = createSlice({
         },
         
         onLogout: ( state, { payload } ) => {
+            console.log('onLogout ejecutado')
             state.status = 'not-authenticated';
             state.user = {};
             state.errorMessage = payload;

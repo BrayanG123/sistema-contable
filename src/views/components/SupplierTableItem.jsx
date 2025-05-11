@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useSupplierStore } from "../../controllers/supplier/useSupplierStore";
 import Swal from "sweetalert2";
-import { useCopmpanyStore } from "../../controllers/company/useCopmpanyStore";
+import { useCompanyStore } from "../../controllers/company/useCompanyStore";
 
 
 
@@ -12,7 +12,7 @@ export const SupplierTableItem = ( supplier ) => {
 
     const navigate = useNavigate();
     const { activeSupplier, setActiveSupplier, startDeleteSupplier } = useSupplierStore();
-    const { startGetCompanyById } = useCopmpanyStore();
+    const { startGetCompanyById } = useCompanyStore();
 
     const [supplierDeleteFlag, setSupplierDeleteFlag] = useState(false);
     const [supplerEditFlag, setSupplerEditFlag] = useState(false);
@@ -20,8 +20,9 @@ export const SupplierTableItem = ( supplier ) => {
 
     const getCompanyName = async() => {
         if ( supplier ) {
-            const company = await startGetCompanyById( supplier.empresaId );
-            setCompanyName( company.nombre )
+            const company = await startGetCompanyById( supplier.company_id );
+            console.log(company.name)
+            setCompanyName( company.name )
         }
     }
 
@@ -69,11 +70,11 @@ export const SupplierTableItem = ( supplier ) => {
     return (
 
         <tr className="border-b hover:bg-gray-100">
-            <td className="w-1/12 px-6 py-4 text-center"> { supplier.nombre } </td>
+            <td className="w-1/12 px-6 py-4 text-center"> { supplier.name } </td>
             <td className="w-1/12 px-6 py-4 text-center"> { supplier.nit } </td>
             <td className="w-1/12 px-6 py-4 text-center"> { companyName || "Cargando..." } </td>
-            <td className="w-2/12 px-6 py-4 text-center"> { supplier.direccion } </td>
-            <td className="w-2/12 px-6 py-4 text-center"> { supplier.correo } </td>
+            <td className="w-2/12 px-6 py-4 text-center"> { supplier.address } </td>
+            <td className="w-2/12 px-6 py-4 text-center"> { supplier.email } </td>
             <td className="w-2/12 px-6 py-4 text-center">
                 <button className="px-4 py-2 stroke-c text-white bg-blue-500 hover:bg-blue-600 rounded-md"
                     onClick={ onClickEdit }

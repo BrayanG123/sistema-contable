@@ -1,47 +1,41 @@
 import { useNavigate } from "react-router-dom";
-import { useCompanyStore, useCustomerStore } from "../../../controllers";
+import { LabelC, ButtonC } from "../../components/ui"
+import { InputFC } from "../../components/ui/InputFC"
+import { useCompanyStore, useUserStore } from "../../../controllers";
+import Swal from "sweetalert2";
 import { useForm } from "../../../helpers/useForm";
 import { useEffect } from "react";
-import { ButtonC, LabelC } from "../../components/ui";
-import { InputFC } from "../../components/ui/InputFC";
-import Swal from "sweetalert2";
-
 
 
 let registerFormFields = {
     name: '',
     last_name: '',
     company: 0,
-    company_name: '',
-    nit: '',
+    role: '',
+    state: '',
     email: '',
     phone_number: 0,
-    address: ''
 }
 
-export const CreateCustomerPage = () => {
+export const CreateUserPage = () => {
 
     const navigate = useNavigate();
-
-    const { startCreateCustomer, startLoadingCustomers } = useCustomerStore();
+    const { startCreateUser, startLoadingUsers } = useUserStore();
     const { companies, startLoadingCompanies } = useCompanyStore();
-
-    const { name, last_name, nit, company, address, phone_number, email, onInputChange } = useForm(registerFormFields);
+    const { name, last_name, role, company, state, phone_number, email, onInputChange } = useForm(registerFormFields);
 
     const registerSubmit = async( event ) => {
         event.preventDefault();
-        // console.log({ name, last_name, nit, company_id: company, address, email, phone_number })
+        // console.log({ name, last_name, role, company_id: company, state, email, phone_number })
         // return;
-        const result = await startCreateCustomer( { name, last_name, nit, company_id: company, address, email, phone_number } );
+        const result = await startCreateUser( { name, last_name, role, company_id: company, status: state, email, phone_number } );
         if ( result ) {
-            startLoadingCustomers();
+            startLoadingUsers();
             Swal.fire({ title: "Creado!", icon: "success", draggable: true });
         }
     }
 
-    const onClickBack = () => {
-        navigate(-1);
-    }
+    const onClickBack = () => { navigate(-1); }
 
     useEffect(() => {
         startLoadingCompanies();
@@ -51,7 +45,7 @@ export const CreateCustomerPage = () => {
         <div className="min-h-full w-full flex items-center justify-center bg-indigo-100">
         
             <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-10 my-10">
-                <h2 className="text-2xl font-bold mb-4 text-center">Registrar Cliente</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">Registrar Usuario</h2>
                 
                 <form onSubmit={ registerSubmit }>
 
@@ -71,10 +65,18 @@ export const CreateCustomerPage = () => {
                     </div>
 
                     <div className="mb-4">
-                        <LabelC> NIT </LabelC>
-                        <InputFC id="nit" name="nit" value={nit} type="text" required 
-                            placeholder="Introduzca el NIT" onChange={ onInputChange }
-                        />
+                        <LabelC> ROL </LabelC>
+                        <select
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            name="role"
+                            onChange={onInputChange}
+                            required
+                        >
+                            <option value=""> Seleccione el Rol </option>                          
+                            <option value="admin"> ADMINISTRADOR </option>
+                            <option value="viewer"> SOLO LECTURA </option>
+                           
+                        </select>
                     </div>
 
                     <div className="mb-4">
@@ -96,10 +98,19 @@ export const CreateCustomerPage = () => {
                     </div>
 
                     <div className="mb-4">
-                        <LabelC>Direccion</LabelC>
-                        <InputFC  id="address" name="address" value={address} type="text" required
-                            placeholder="Introduzca la direccion" onChange={ onInputChange }
-                        />
+                        <LabelC>Estatus</LabelC>
+                        <select
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            name="state"
+                            onChange={onInputChange}
+                            required
+                        >
+                        <option value=""> Seleccione el Estado </option>                          
+                        <option value="active"> ACTIVO </option>
+                        <option value="inactive"> INACTIVO </option>
+                        <option value="suspended"> SUSPENDIDO </option>
+                        {/* <option value="blocked"> BLOCKED </option> */}
+                        </select>
                     </div>
 
                     <div className="row mb-4 flex">

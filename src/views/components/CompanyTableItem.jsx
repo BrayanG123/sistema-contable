@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCopmpanyStore } from "../../controllers/company/useCopmpanyStore"
+import { useCompanyStore } from "../../controllers"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export const CompanyTableItem = ( company ) => {
 
-    const { activeCompany, startDeleteCompany, setActiveCompany, startUpdateCompany } = useCopmpanyStore();
+    const { activeCompany, startDeleteCompany, setActiveCompany, startUpdateCompany } = useCompanyStore();
     const navigate = useNavigate();
 
     const [editFlag, setEditFlag] = useState(false); //bandera editar
@@ -57,11 +57,11 @@ export const CompanyTableItem = ( company ) => {
     return (
 
         <tr className="border-b hover:bg-gray-100">
-            <td className="w-1/12 px-6 py-4 text-center"> { company.nombre } </td>
+            <td className="w-1/12 px-6 py-4 text-center"> { company.name } </td>
             <td className="w-1/12 px-6 py-4 text-center"> { company.nit } </td>
-            <td className="w-2/12 px-6 py-4 text-center"> { company.direccion } </td>
-            <td className="w-1/12 px-6 py-4 text-center"> { company.telefono } </td>
-            <td className="w-2/12 px-6 py-4 text-center"> { company.correo } </td>
+            <td className="w-2/12 px-6 py-4 text-center"> { company.address } </td>
+            <td className="w-1/12 px-6 py-4 text-center"> { company.phone_number } </td>
+            <td className="w-2/12 px-6 py-4 text-center"> { company.email } </td>
             <td className="w-2/12 px-6 py-4 text-center">
                 <button className="px-4 py-2 stroke-c text-white bg-blue-500 hover:bg-blue-600 rounded-md"
                     onClick={ onClickEdit }

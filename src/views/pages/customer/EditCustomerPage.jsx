@@ -1,45 +1,43 @@
-import { useNavigate } from "react-router-dom";
-import { useCompanyStore, useCustomerStore } from "../../../controllers";
-import { useForm } from "../../../helpers/useForm";
-import { useEffect } from "react";
-import { ButtonC, LabelC } from "../../components/ui";
-import { InputFC } from "../../components/ui/InputFC";
-import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
+import { LabelC, ButtonC } from '../../components/ui';
+import { InputFC } from '../../components/ui/InputFC';
+import { useCompanyStore, useCustomerStore } from '../../../controllers';
+import { useForm } from '../../../helpers/useForm';
+import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 
 
-let registerFormFields = {
-    name: '',
-    last_name: '',
-    company: 0,
-    company_name: '',
-    nit: '',
-    email: '',
-    phone_number: 0,
-    address: ''
-}
-
-export const CreateCustomerPage = () => {
+export const EditCustomerPage = () => {
 
     const navigate = useNavigate();
 
-    const { startCreateCustomer, startLoadingCustomers } = useCustomerStore();
+    const { activeCustomer, startUpdateCustomer, startLoadingCustomers, setActiveCustomer } = useCustomerStore();
     const { companies, startLoadingCompanies } = useCompanyStore();
 
-    const { name, last_name, nit, company, address, phone_number, email, onInputChange } = useForm(registerFormFields);
+    const { name, last_name, nit, company, address, phone_number, email, onInputChange, setFormState } = useForm( activeCustomer );
 
-    const registerSubmit = async( event ) => {
+
+
+    useEffect(() => {
+        if ( activeCustomer && companies) {
+            setFormState( { ...activeCustomer } );
+        }
+    }, [activeCustomer]); 
+
+    const updateSubmit = async( event ) => {
         event.preventDefault();
         // console.log({ name, last_name, nit, company_id: company, address, email, phone_number })
         // return;
-        const result = await startCreateCustomer( { name, last_name, nit, company_id: company, address, email, phone_number } );
+        const result = await startUpdateCustomer( activeCustomer.id, { name, last_name, nit, company_id: company, address, email, phone_number } );
         if ( result ) {
             startLoadingCustomers();
-            Swal.fire({ title: "Creado!", icon: "success", draggable: true });
+            Swal.fire({ title: "Modificado!", icon: "success", draggable: true });
         }
     }
 
     const onClickBack = () => {
+        setActiveCustomer(null);
         navigate(-1);
     }
 
@@ -47,13 +45,14 @@ export const CreateCustomerPage = () => {
         startLoadingCompanies();
     }, [])
 
+    
     return (
         <div className="min-h-full w-full flex items-center justify-center bg-indigo-100">
         
             <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-10 my-10">
-                <h2 className="text-2xl font-bold mb-4 text-center">Registrar Cliente</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">Modificar datos del Cliente</h2>
                 
-                <form onSubmit={ registerSubmit }>
+                <form onSubmit={ updateSubmit }>
 
                     <div className="row mb-4 flex">  
                         <div className="w-1/2 ">
@@ -132,7 +131,7 @@ export const CreateCustomerPage = () => {
                         <div className="w-1/2"></div> 
                         <div className="w-1/2 flex space-x-4">                                                
                             <ButtonC type="submit" bgColor="bg-blue-600" hoverColor="hover:bg-blue-500">
-                                Registrar
+                                Modificar
                             </ButtonC>
                             <ButtonC
                                 bgColor='bg-red-600'

@@ -1,4 +1,4 @@
-import { ChevronFirst, ChevronLast, MoreVertical } from "lucide-react"
+import { MoreVertical, AlignJustify } from "lucide-react"
 
 import { createContext, useState } from "react"
 
@@ -14,14 +14,14 @@ export const Sidebar = ( { children } ) => {
             <nav className="h-full flex flex-col flex-1 bg-white border-r shadow-sm">
 
                 <div className="p-4 pb-2 flex justify-between items-center">
-                    <img src="https://logoipsum.com/artwork/369" 
+                    {/* <img src="https://logoipsum.com/artwork/369" 
                         className={` overflow-hidden transition-all ${ expanded? "w-32" : "w-0" }`} 
                         alt="" 
-                    />
+                    /> */}
                     <button onClick={() => setExpanded( (curr) => !curr ) } 
                         className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100" 
                     >
-                        { expanded? <ChevronFirst /> : <ChevronLast/> }
+                         <AlignJustify /> 
                     </button>
                 </div>
 

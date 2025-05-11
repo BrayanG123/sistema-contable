@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { ButtonC } from "../../components/ui/ButtonC"
 import { InputFC } from "../../components/ui/InputFC"
 import { LabelC } from "../../components/ui/LabelC"
-import { useCopmpanyStore } from "../../../controllers/company/useCopmpanyStore"
 import { useForm } from "../../../helpers/useForm"
+import { useCompanyStore } from "../../../controllers"
 import Swal from "sweetalert2"
 
 
@@ -11,7 +11,7 @@ import Swal from "sweetalert2"
 
 export const EditCompanyPage = () => {
 
-    const { activeCompany, startLoadingCompanies, startUpdateCompany } = useCopmpanyStore();
+    const { activeCompany, startLoadingCompanies, startUpdateCompany } = useCompanyStore();
     const { nombre, nit, direccion, telefono, correo, onInputChange, setFormState } = useForm( activeCompany );
 
     useEffect(() => {

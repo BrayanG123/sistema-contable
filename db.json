@@ -1,0 +1,213 @@
+{
+    "users": [
+               
+        {
+            "id": "1",
+            "company_id": "1",
+            "name": "Carlos",
+            "last_name": "Ramírez",
+            "password": "12345",
+            "email": "carlos.ramirez@empresa.com",
+            "role": "admin",
+            "status": "active",
+            "phone_number": "789456123"
+        },
+        {
+            "id": "2",
+            "company_id": "2",
+            "name": "Lucía",
+            "last_name": "Fernández",
+            "password": "12345",
+            "email": "lucia.fernandez@empresa.com",
+            "role": "editor",
+            "status": "active",
+            "phone_number": "722334455"
+        },
+        {
+            "id": "3",
+            "company_id": "102",
+            "name": "Marco",
+            "last_name": "Gómez",
+            "password": "12345",
+            "email": "marco.gomez@empresa.com",
+            "role": "viewer",
+            "status": "inactive",
+            "phone_number": "765432189"
+        },
+        {
+            "id": "4",
+            "company_id": "103",
+            "name": "Sofía",
+            "last_name": "Lopez",
+            "password": "12345",
+            "email": "sofia.lopez@empresa.com",
+            "role": "editor",
+            "status": "active",
+            "phone_number": "711223344"
+        },
+        {
+            "id": "5",
+            "company_id": "101",
+            "name": "Andrés",
+            "last_name": "Mendoza",
+            "password": "12345",
+            "email": "andres.mendoza@empresa.com",
+            "role": "admin",
+            "status": "suspended",
+            "phone_number": "700800900"
+        }
+                 
+    ],
+
+    "companies": [
+
+        {
+            "id": "1",
+            "email": "contacto@agribol.com",
+            "name": "Agribol S.R.L.",
+            "nit": "1029384756",
+            "address": "Av. Los Agricultores #123, Santa Cruz",
+            "phone_number": "78945612"
+        },
+        {
+            "id": "2",
+            "email": "info@tecnosoluciones.com",
+            "name": "Tecno Soluciones LTDA",
+            "nit": "2039485761",
+            "address": "Calle Tecnológica #88, La Paz",
+            "phone_number": "76543210"
+        },
+        {
+            "id": "3",
+            "email": "admin@bionatur.com",
+            "name": "BioNatur Bolivia",
+            "nit": "3049581726",
+            "address": "Zona Industrial KM 7, Cochabamba",
+            "phone_number": "71234567"
+        },
+        {
+            "id": "4",
+            "email": "servicio@andesfoods.com",
+            "name": "Andes Foods SRL",
+            "nit": "4059182736",
+            "address": "Av. Cordillera #45, Tarija",
+            "phone_number": "70011223"
+        },
+        {
+            "id": "5",
+            "email": "ventas@quimicalatina.com",
+            "name": "Química Latina",
+            "nit": "5061728394",
+            "address": "Parque Industrial #77, Oruro",
+            "phone_number": "70998877"
+        }               
+    ],
+
+    "clients": [
+        
+        {
+            "id": "1",
+            "company_id": "1",
+            "name": "Jorge",
+            "last_name": "Salvatierra",
+            "nit": "789456123",
+            "email": "jorge.salvatierra@agroexport.com",
+            "phone_number": "76112233",
+            "address": "Av. Banzer KM 9, Santa Cruz"
+        },
+        {
+            "id": "2",
+            "company_id": "2",
+            "name": "Diana",
+            "last_name": "Rivera",
+            "nit": "658741236",
+            "email": "diana.rivera@solintegradas.com",
+            "phone_number": "76445566",
+            "address": "Calle 21 de Calacoto, La Paz"
+        },
+        {
+            "id": "3",
+            "company_id": "3",
+            "name": "Luis",
+            "last_name": "Paz",
+            "nit": "987654321",
+            "email": "luis.paz@ecovida.com",
+            "phone_number": "77889900",
+            "address": "Av. Blanco Galindo KM 6, Cochabamba"
+        },
+        {
+            "id": "4",
+            "company_id": "4",
+            "name": "María",
+            "last_name": "Gutiérrez",
+            "nit": "112233445",
+            "email": "maria.gutierrez@delsur.com",
+            "phone_number": "70022113",
+            "address": "Zona El Tejar, Tarija"
+        },
+        {
+            "id": "5",
+            "company_id": "5",
+            "name": "Fernando",
+            "last_name": "Torrico",
+            "nit": "556677889",
+            "email": "fernando.torrico@reactiva.com",
+            "phone_number": "79008811",
+            "address": "Av. Sargento Flores, Oruro"
+        }                  
+    ],
+
+    "suppliers": [
+        
+        {
+            "id": "1",
+            "company_id": "1",
+            "name": "Carlos",
+            "last_name": "Villanueva",
+            "nit": "849302158",
+            "email": "carlos.villanueva@proveagro.com",
+            "phone_number": "76543210",
+            "address": "Zona Norte KM 10, Santa Cruz"
+        },
+        {
+            "id": "2",
+            "company_id": "2",
+            "name": "Lucía",
+            "last_name": "Romero",
+            "nit": "928374610",
+            "email": "lucia.romero@techparts.com",
+            "phone_number": "77112233",
+            "address": "Calle Cobija #88, La Paz"
+        },
+        {
+            "id": "3",
+            "company_id": "3",
+            "name": "Esteban",
+            "last_name": "Ortega",
+            "nit": "736281940",
+            "email": "esteban.ortega@bioplus.com",
+            "phone_number": "77001122",
+            "address": "Av. Petrolera, Cochabamba"
+        },
+        {
+            "id": "4",
+            "company_id": "4",
+            "name": "Roxana",
+            "last_name": "Meza",
+            "nit": "628374920",
+            "email": "roxana.meza@alimentostarija.com",
+            "phone_number": "77884466",
+            "address": "Zona Mercado Campesino, Tarija"
+        },
+        {
+            "id": "5",
+            "company_id": "5",
+            "name": "Diego",
+            "last_name": "Camacho",
+            "nit": "839201746",
+            "email": "diego.camacho@quimprove.com",
+            "phone_number": "70997788",
+            "address": "Av. 6 de Agosto, Oruro"
+        }                 
+    ]
+}   

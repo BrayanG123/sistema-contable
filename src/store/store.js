@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, branchSlice, companySlice, customerSlice, supplierSlice } from "./index";
+import { authSlice, branchSlice, companySlice, customerSlice, supplierSlice, userSlice } from "./index";
 
 
 
@@ -18,6 +18,7 @@ export const store = configureStore({
         companies: companySlice.reducer,
         suppliers: supplierSlice.reducer,
         customers: customerSlice.reducer,
+        users: userSlice.reducer,
 
     }
 });

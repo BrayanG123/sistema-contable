@@ -5,7 +5,7 @@ import contabilidadApi from "../../api/contabilidadApi";
 
 
 
-export const useCopmpanyStore = () => {
+export const useCompanyStore = () => {
 
     const dispatch = useDispatch();
     const { companies, activeCompany } = useSelector( state => state.companies)
@@ -42,6 +42,7 @@ export const useCopmpanyStore = () => {
     const startGetCompanyById = async( id ) => { 
         try {
             const { data } = await contabilidadApi.get(`/companies/${id}`);
+            // console.log(data)
             return data;
         } catch (error) {
             console.log('Error en la solicitud');

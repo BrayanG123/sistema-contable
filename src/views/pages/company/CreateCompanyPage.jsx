@@ -2,8 +2,8 @@ import { useEffect } from "react"
 import { ButtonC } from "../../components/ui/ButtonC"
 import { InputFC } from "../../components/ui/InputFC"
 import { LabelC } from "../../components/ui/LabelC"
-import { useCopmpanyStore } from "../../../controllers/company/useCopmpanyStore"
 import { useForm } from "../../../helpers/useForm"
+import { useCompanyStore } from "../../../controllers"
 
 
 
@@ -18,7 +18,7 @@ let registerFormFields = {
 
 export const CreateCompanyPage = () => {
 
-    const { startLoadingCompanies, startCreateCompany } = useCopmpanyStore();
+    const { startLoadingCompanies, startCreateCompany } = useCompanyStore();
     const { nombre, nit, direccion, telefono, correo, onInputChange } = useForm( registerFormFields );
 
 

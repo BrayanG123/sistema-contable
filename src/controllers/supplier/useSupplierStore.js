@@ -18,7 +18,7 @@ export const useSupplierStore = () => {
     // Cargar Proveedor
     const startLoadingSuppliers = async() => { 
         try {
-            const { data } = await contabilidadApi.get('/proveedor');
+            const { data } = await contabilidadApi.get('/suppliers');
             dispatch( onLoadSuppliers( data ) );
         } catch (error) {
             console.log('Error en la Solicitud');
@@ -39,7 +39,7 @@ export const useSupplierStore = () => {
 
     const startGetSupplierById = async( id ) => { 
         try {
-            const { data } = await contabilidadApi.get(`/proveedor/${id}`);
+            const { data } = await contabilidadApi.get(`/suppliers/${id}`);
             return data;
         } catch (error) {
             console.log('Error en la solicitud');
@@ -50,7 +50,7 @@ export const useSupplierStore = () => {
     //POST - crear Proveedor
     const startCreateSupplier = async( supplier ) => {
         try {
-            const { data } = await contabilidadApi.post( '/proveedor', supplier ); 
+            const { data } = await contabilidadApi.post( '/suppliers', supplier ); 
             console.log(data)
             dispatch( onAddNewSupplier(data) ); 
             return { success: true };
@@ -63,7 +63,7 @@ export const useSupplierStore = () => {
         // PUT - actualizar Proveedor
     const startUpdateSupplier = async ( id, supplier ) => {    
         try {
-            const { data } = await contabilidadApi.put(`/empresa/${supplier.empresaId}/proveedor/${id}`, supplier );
+            const { data } = await contabilidadApi.put(`/empresa/${supplier.empresaId}/suppliers/${id}`, supplier );
             console.log(data);
             dispatch( onUpdateSupplier( data) );
             return { success: true };
@@ -77,7 +77,7 @@ export const useSupplierStore = () => {
     const startDeleteSupplier = async( supplier ) => {
         console.log(supplier)
         try {         
-            const { data } = await contabilidadApi.delete( `/empresa/${supplier.empresaId}/proveedor/${ supplier.id }` );
+            const { data } = await contabilidadApi.delete( `/empresa/${supplier.empresaId}/suppliers/${ supplier.id }` );
             console.log(data);
             dispatch( onDeleteSupplier() );
             return { success: true };

@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { ButtonC } from "../../components/ui/ButtonC"
 import { InputFC } from "../../components/ui/InputFC"
 import { LabelC } from "../../components/ui/LabelC"
-import { useSupplierStore } from "../../../controllers/supplier/useSupplierStore"
-import { useCopmpanyStore } from "../../../controllers/company/useCopmpanyStore"
 import { useEffect } from "react"
 import { useForm } from "../../../helpers/useForm"
 import Swal from "sweetalert2"
+import { useCompanyStore, useSupplierStore } from "../../../controllers"
 
 
 let registerFormFields = {
@@ -23,7 +22,7 @@ export const CreateSupplierPage = () => {
     const navigate = useNavigate();
 
     const { startCreateSupplier, startLoadingSuppliers } = useSupplierStore();
-    const { companies, startLoadingCompanies } = useCopmpanyStore();
+    const { companies, startLoadingCompanies } = useCompanyStore();
 
     const { nombre, nit, empresa, direccion, correo, onInputChange } = useForm(registerFormFields);
 

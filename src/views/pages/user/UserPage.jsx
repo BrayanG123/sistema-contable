@@ -1,40 +1,40 @@
-
-
-
-
 import React, { useEffect } from 'react'
-import { useCustomerStore } from '../../../controllers'
-import { CustomerTableItem } from '../../components/CustomerTableItem';
-import { ButtonC } from '../../components/ui';
-import { useNavigate } from 'react-router-dom';
 
-export const CustomerPage = () => {
+import { ButtonC } from '../../components/ui'
+import { useUserStore } from '../../../controllers/user/useUserStore'
+import { UserTableItem } from '../../components/UserTableItem'
 
-    const { customers, startLoadingCustomers } = useCustomerStore();
-    const navigate = useNavigate();
+
+
+
+export const UserPage = () => {
+
+    const { users, startLoadingUsers } = useUserStore();
+
 
     const onClickCreate = () => {
-        navigate('/app/customer/create');
+        console.log('creando')
     }
 
     useEffect(() => {
-        startLoadingCustomers();
-    }, [])  
+        startLoadingUsers();
+    }, [])
+    
 
     return (
         <div className="h-auto w-full flex items-center justify-center bg-blue-100">
             <div className="w-full max-w-8xl mx-auto bg-white rounded-lg shadow-lg p-10 mt-10">
-                <h2 className="text-2xl font-bold mb-4 text-center">Lista de Clientes</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">Lista de Usuarios</h2>
                 
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg ">
                     <thead className="bg-indigo-400 text-white">
                         <tr>
-                            <th className="w-1/12 px-5 py-3 text-cente">Nombre</th>
-                            <th className="w-1/12 px-5 py-3 text-center">NIT</th>
-                            <th className="w-1/12 px-5 py-3 text-center">Empresa</th>
-                            <th className="w-2/12 px-5 py-3 text-center">Correo</th>
+                            <th className="w-2/12 px-5 py-3 text-center ">Nombre</th>
+                            <th className="w-1/12 px-5 py-3 text-center ">Empresa</th>
+                            <th className="w-1/12 px-5 py-3 text-center">Rol</th>
+                            <th className="w-1/12 px-5 py-3 text-center">Correo</th>
+                            <th className="w-1/12 px-5 py-3 text-center">Status</th>
                             <th className="w-2/12 px-5 py-3 text-center">Telefono</th>
-                            <th className="w-2/12 px-5 py-3 text-center">Direccion</th>
                             <th className="w-2/12 px-5 py-3 text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -44,11 +44,11 @@ export const CustomerPage = () => {
 
                     <table className="min-w-full bg-white border border-gray-300">
                         <tbody>
-
-                            {   customers.map( customer => (
-                                    <CustomerTableItem 
-                                        key={ customer.id }
-                                        { ...customer }
+                          
+                            {   users.map( user => (
+                                    <UserTableItem 
+                                        key={ user.id }
+                                        { ...user }
                                     />
                                 ) )
                             }
@@ -62,5 +62,5 @@ export const CustomerPage = () => {
             </div>
         </div>
     )
-
+    
 }
